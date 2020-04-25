@@ -21,6 +21,8 @@ public:
     void read(istream& in);
     void print(ostream& out=cout) const;
     void write(ostream& out) const;
+    ~Phone();
+    
 private:
     int a;
     int b;

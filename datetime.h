@@ -38,7 +38,6 @@ class DateTime
     void print( ostream& out = cout ) const;
     void setDate( int mm, int dd, int yy );
     void setTime( int h, int m);
-
   private:
     /** the months 1-12*/
     int mm;

@@ -55,3 +55,7 @@ void Phone::print(ostream& out) const{
 void Phone::write(ostream& out) const{
     out << '(' << type << ')' << a << '-' << b << '-' << c << '-' << d;
 }
+
+Phone::~Phone(){
+    
+}

@@ -94,3 +94,7 @@ istream& operator>>( istream& in, Address& addr ){
     addr.read(in);
     return in;
 }
+
+Address::~Address(){
+    
+}
