@@ -71,7 +71,6 @@ void Address::read(istream& in){
     setRegion(region);
     setZip(zip);
 }
-
 /**
  * 
  */
@@ -83,7 +82,6 @@ void Address::write(ostream& out) const{
     out << "\"" << this->street << "\"\t\"" << this->city << "\"\t\"" << this->region 
         << "\"\t\"" << this->zip << "\"";
 }
-
 /** */
 ostream& operator<<( ostream& out, const Address& addr ){
     addr.write(out);
@@ -95,6 +93,6 @@ istream& operator>>( istream& in, Address& addr ){
     return in;
 }
 
-Address::~Address(){
-    
-}
+// Address::~Address(){
+
+// }

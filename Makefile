@@ -1,5 +1,5 @@
 a.out: main.o address.o phone.o person.o datetime.o people.o
-	g++ -std=c++11 -g main.o address.o phone.o person.o datetime.o people.o
+	g++ -std=c++11 -Wall -g main.o address.o phone.o person.o datetime.o people.o
 main.o: main.cpp main.h person.cpp person.h datetime.cpp datetime.h people.h people.cpp
 	g++ -std=c++11 -c main.cpp
 people.o: people.cpp people.h person.cpp person.h address.cpp address.h

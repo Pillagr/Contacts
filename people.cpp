@@ -70,9 +70,9 @@ void People::write(string filename, bool text){
         for(vector<Person *>::iterator it = people.begin(); it != people.end(); ++it){
             person = *it;
             fp.write((char *)person, sizeof(Person));
-        }
-        fp.close();
+        }  
     }
+    fp.close();
 }
 void People::add(Person* person){
     people.push_back(person);

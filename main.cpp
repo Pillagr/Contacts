@@ -5,23 +5,24 @@ const int TESTS = 8;
 void runTests(int);
 
 int main(int argc, const char * argv[]){
-    if(argc == 1){
-		for(int i = 0; i < TESTS; i++){
-			runTests(i);
-		}
-	}
-	else{
-		// if(!(strncmp(argv[1], "-e", 2))){
-		// 	for(int i = stoi(argv[2]); i < TESTS; i++){
-		// 		runTests(i);
-		// 	}
-		// }
-		// else{
-		    for(int i = 1; i < argc; i++){
-		    	runTests(stoi(argv[i]));
-		    }
-		// }
-	}
+    runTests(100);
+    // if(argc == 1){
+	// 	for(int i = 0; i < TESTS; i++){
+	// 		runTests(i);
+	// 	}
+	// }
+	// else{
+	// 	// if(!(strncmp(argv[1], "-e", 2))){
+	// 	// 	for(int i = stoi(argv[2]); i < TESTS; i++){
+	// 	// 		runTests(i);
+	// 	// 	}
+	// 	// }
+	// 	// else{
+	// 	    for(int i = 1; i < argc; i++){
+	// 	    	runTests(stoi(argv[i]));
+	// 	    }
+	// 	// }
+	// }
 
     return 0;
 }
@@ -101,7 +102,7 @@ void runTests(int test){
                 ppl.write("tests/test.fcc", false);
                 p2.read("tests/test.fcc", false);
                 if(ppl.size() != p2.size()){
-                    cout << "FAIL - sz: " << p2.size() << " vs. " << ppl.size() << endl;
+                    cout << "FAIL - sz: " << to_string(p2.size()) << " vs. " << to_string(ppl.size()) << endl;
                 }
                 cout << "PASS" << endl;
             }
@@ -118,7 +119,7 @@ void runTests(int test){
                 ppl.write("tests/test.out", true);
                 p2.read("tests/test.out", true);
                 if(ppl.size() != p2.size()){
-                    cout << "FAIL - sz: " << p2.size() << " vs. " << ppl.size() << endl;
+                    cout << "FAIL - sz: " << to_string(p2.size()) << " vs. " << to_string(ppl.size()) << endl;
                 }
                 cout << "PASS" << endl;
             }
@@ -131,15 +132,46 @@ void runTests(int test){
             cout << "-----Test " << test << "-----" << endl;
             try{
                 People ppl;
+                ppl.read("tests/test.fcc");
+                Person* arr = ppl.toArray();
+                for(int i =0; i < 4; i++){
+                    arr[i].write();
+                }
+            }
+            catch(...){
+                cout << "FAIL - error" << endl;
+            }
+            break;
+        } // toArray
+        case 8:{
+            cout << "-----Test " << test << "-----" << endl;
+            try{
+                Person p;
+                fstream in("tests/test2.in");
+                p.read(in);
+                cout << p << endl;
+
+                cout << "PASS" << endl;
+            }
+            catch(...){
+                cout << "FAIL - error" << endl;
+            }
+            break;
+        }
+        case 100:{
+            cout << "-----Test " << test << "-----" << endl;
+            try{
+                People ppl;
                 ppl.read("tests/test.in", true);
                 Person p;
                 fstream in("tests/test2.in");
                 p.read(in);
+                p.write(cout);
                 in.close();
                 cout << "Adding..." << endl;
-                ppl.add(&p);
-                if(ppl.size() != 5){
-                    cout << "FAIL - sz: " << ppl.size() << endl;
+                //ppl.add(&p);
+                if(ppl.size() != 4){
+                    cout << "FAIL - sz: " << to_string(ppl.size()) << endl;
                 }
                 else{
                     cout << "PASS - sz" << endl;

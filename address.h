@@ -25,17 +25,17 @@ private:
     string type;
 public:
     Address();
-    Address(string st, string city, string region, string zip, string type);
-    void setAll(string st, string city, string region, string zip, string type);
-    void setStreet(string st);
-    void setCity(string city);
-    void setRegion(string region);
-    void setZip(string zip);
-    void setType(string type);
-    void read(istream& in);
-    void print( ostream& out = cout ) const;
-    void write(ostream& out) const;
-    ~Address();
+    Address(string, string, string, string, string);
+    void setAll(string, string, string, string, string);
+    void setStreet(string);
+    void setCity(string);
+    void setRegion(string);
+    void setZip(string);
+    void setType(string);
+    void read(istream&);
+    void print( ostream& = cout ) const;
+    void write(ostream&) const;
+    //~Address();
 };
 
 
