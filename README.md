@@ -28,3 +28,9 @@ Read and write functions:
 
 
 GUI: 
+
+
+
+Questions: 
+- does ~Person need to delete a datetime, addr?
+    

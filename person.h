@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <functional>
 #include "phone.h"
 #include "address.h"
 #include "datetime.h"
@@ -16,7 +17,7 @@ public:
     Person();
     Person(string fname, string lname, Address* address, 
             Phone* phone, string email, string note="");
-
+    Person(const Person&);
     void read(istream&);
     void write(ostream& = cout) const;
 
@@ -27,6 +28,7 @@ public:
     void setFName(string);
     void setLName(string);
     void setNote(string);
+    void setID();
 
     Phone& getPhone();
     Address& getAddress();
@@ -34,11 +36,17 @@ public:
     string getFName();
     string getLName();
     string getNote();
+    size_t getID();
+
+    int_fast8_t match(string);
+
     ~Person();
 
 
 
 private:
+    /** std::hash() of first and last name */
+    size_t id;
     /** The Address object of this Person */
     Address address;
     /** The Phone ojbect of this Person */

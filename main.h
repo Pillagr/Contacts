@@ -5,6 +5,7 @@
 #include <string>
 #include <cstdlib>
 #include "people.h"
+#include "person.h"
 #include <fstream>
 using namespace std;
 

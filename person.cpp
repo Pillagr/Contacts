@@ -23,7 +23,21 @@ Person::Person(string fname, string lname, Address* address,
     setPhone(phone);
     setEmail(email);
     setNote(note);
+    setID();
 }
+
+Person::Person(const Person& other){
+    fname = other.fname;
+    lname = other.lname;
+    address = other.address;
+    phone = other.phone;
+    email = other.email;
+    note = other.note;
+    id = other.id;
+}
+
+
+
 /**
  * 
  */ 
@@ -46,6 +60,7 @@ void Person::read(istream& in){
         setLName(lname);
         setEmail(email);
         setNote(note);
+        setID();
     }
 
 }
@@ -103,6 +118,14 @@ void Person::setNote(string note){
 }
 
 /**
+ * 
+ */
+void Person::setID(){
+    string fullname = fname + lname;
+    this->id = hash<string>{}(fullname);
+} 
+
+/**
  *
  */ 
 Phone& Person::getPhone(){
@@ -138,6 +161,28 @@ string Person::getLName(){
 string Person::getNote(){
     return this->note;
 }
+
+size_t Person::getID(){
+    return this->id;
+}
+
+/**
+ * 
+ */ 
+int_fast8_t Person::match(string query){
+    if(query == fname + " " + lname){
+        return 10;
+    }
+    if(query == fname || query == lname){
+        return 8;
+    }
+    else{
+        return 0;
+    }
+    
+}
+
+
 /**
  * 
  */ 
@@ -154,5 +199,5 @@ istream& operator>>( istream& in, Person& p ){
 }
 
 Person::~Person(){
-    
+
 }

@@ -1,0 +1,6 @@
+main.o: main.cpp main.h people.h person.h phone.h address.h datetime.h
+datetime.o: datetime.cpp datetime.h
+address.o: address.cpp address.h
+phone.o: phone.cpp phone.h
+person.o: person.cpp person.h phone.h address.h datetime.h
+people.o: people.cpp people.h person.h phone.h address.h datetime.h

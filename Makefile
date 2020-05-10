@@ -1,20 +1,26 @@
-a.out: main.o address.o phone.o person.o datetime.o people.o
-	g++ -std=c++11 -Wall -g main.o address.o phone.o person.o datetime.o people.o
-main.o: main.cpp main.h person.cpp person.h datetime.cpp datetime.h people.h people.cpp
-	g++ -std=c++11 -c main.cpp
-people.o: people.cpp people.h person.cpp person.h address.cpp address.h
-	g++ -std=c++11 -c people.cpp
-person.o: person.cpp person.h address.cpp address.h
-	g++ -std=c++11 -c person.cpp
-datetime.o: datetime.cpp datetime.h
-	g++ -std=c++11 -c datetime.cpp
-address.o: address.cpp address.h
-	g++ -std=c++11 -c address.cpp
-phone.o: phone.cpp phone.h
-	g++ -std=c++11 -c phone.cpp
+CC = g++
+CFLAGS = -std=c++11 -Wall -g 
+SRCS = main.cpp datetime.cpp address.cpp phone.cpp person.cpp people.cpp
+#SRCS = ${wildcard *.cpp}
+OBJS = ${SRCS:.cpp=.o}
+#INCLS = ${wildcard *.h}
+INCLS = ${SRCS:.cpp=.h} datetime.h address.h phone.h person.h people.h
 
+a.out: $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS)
 
-.PHONY: clean
+$(OBJS):
+	$(CC) $(CFLAGS) -c $*.cpp
+
+depend: Makefile.dep
+	$(CC) -MM $(SRCS) > Makefile.dep
+
+Makefile.dep:
+	touch Makefile.dep
+
+.PHONY: submit clean
 
 clean:
-	rm -f *.o core a.out
+	rm -f $(OBJS) a.out core
+
+include Makefile.dep

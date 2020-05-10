@@ -16,12 +16,17 @@ class People {
 
   public:
     People();
+    People(const People&);
+
+    const People& operator=(const People&);
+
+    Person* at(unsigned);
+
     void read(istream&);
     void read(string, bool=false);
     void write(ostream&);
     void write(string, bool=false);
     void add(Person*);
-    void make_index();
     void write_index(string);
     void write_index(ostream& = cout);
     Person* toArray();
@@ -29,7 +34,7 @@ class People {
     unsigned size() const;
     bool empty() const;
     void clear();
-    Person& find(string);
+    Person* find(string, string);
     ~People();
 
 

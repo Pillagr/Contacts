@@ -3,8 +3,21 @@
  * Default Constructor.
  */ 
 People::People(){
-    
+
 }
+
+/**
+ * 
+ */
+People::People(const People& other){
+    *this = other;
+}
+
+Person* People::at(unsigned position){
+    return people.at(position);
+}
+
+
 /**
  * 
  */ 
@@ -35,7 +48,6 @@ void People::read(string filename, bool text){
         delete person;
     }
     fp.close();
-    
 }
 /**
  * 
@@ -99,8 +111,6 @@ unsigned People::size() const{
 bool People::empty() const{
     return (people.size() == 0);
 }
-
-
 /**
  * 
  */ 
@@ -115,26 +125,19 @@ void People::write_index(string filename){
 void People::write_index(ostream& out){
     for(vector<Person *>::iterator it = people.begin(); it != people.end(); ++it){
         out << (*(*it)).getLName() << ", ";
-        out << (*(*it)).getFName() << "\n";
+        out << (*(*it)).getFName();
     }
 }
 /**
  * 
  */ 
 void People::clear(){
-    // if(!empty()){
-    //     cout << "s";
-    //     for(vector<Person *>::iterator it = people.begin(); it != people.end(); it++){
-    //        Person* p = people.front();
-    //        delete p;
-    //     }
-    // }
     if(!empty()){
         unsigned sz = people.size();
         // cout << "SZ:" << sz << endl;
         for(unsigned i = 0; i < sz; i++){
             // cout << "i:" << i << endl;
-            delete people.at(i);
+            delete people[i];
         }
     }
 }
@@ -143,13 +146,38 @@ void People::clear(){
 /**
  * 
  */ 
-Person& find(string query, string filename, string indexname){
-    bool found = false;
+Person* People::find(string query, string indexname=""){
     string fname, lname;
+
+    /*
+    use try block, check if filename has idx
+    */
+
     fstream fp(indexname);
     getline(fp, lname, ',');
     getline(fp, fname, '\n');
+    unsigned count = 0,
+                sz = size();
+    while(fp && count > sz){
+        if(query == fname + " " + lname){
+            return people.at(count);
+        }
+        ++count;
+        getline(fp, lname, ',');
+        getline(fp, fname, '\n');
+    }
+    throw logic_error("No Such Person found.");
+}
 
+const People& People::operator=(const People& other){
+    if(!empty()){
+        clear();
+    }
+    people.resize(other.size());
+    for(unsigned i = 0; i < other.size(); i++){
+        people.push_back( new Person(*other.people.at(i)));
+    }
+    return *this;
 }
 
 People::~People(){
